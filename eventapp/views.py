@@ -55,3 +55,23 @@ def user_profile(request):
     
 
     return render(request, 'users/user_profile.html', { 'user_profile':user_profile,'events':events})
+
+@login_required(login_url='/accounts/login/')
+def edit_profile(request):
+    current_user = request.user
+    
+    if request.method == 'POST':
+        form=NewProfileForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            profile=form.save(commit=False)
+            profile.user = current_user
+            profile.save()
+
+            return redirect('user-profile')
+
+    else:
+            form=NewProfileForm()
+
+    return render(request, 'users/edit_profile.html', {'form':form,})
+
