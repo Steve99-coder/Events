@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+import datetime as dt
+from tinymce.models import HTMLField
 
 # Create your models here.
 
@@ -37,10 +40,10 @@ class Event(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
 
 
-    def save_project(self):
+    def save_event(self):
         self.save()
 
-    def delete_project(self):
+    def delete_event(self):
         self.delete()
 
     def __str__(self):
@@ -58,6 +61,23 @@ class Event(models.Model):
         return projects
 
     @classmethod
-    def search_project(cls,title):
+    def search_event(cls,title):
         title = cls.objects.filter(title__icontains=title)
         return title
+
+        
+class Location(models.Model):
+    locationName = models.CharField(max_length=30)
+
+    def save_Location(self):
+        self.save()
+
+    def delete_Location(self):
+        self.delete()
+
+    @classmethod
+    def update_Location(cls, id, value):
+        cls.objects.filter(id=id).update(image=value)
+
+    def __str__(self):
+        return self.locationName
