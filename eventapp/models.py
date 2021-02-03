@@ -37,6 +37,7 @@ class Event(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=True, null=True)
     comments=models.CharField(max_length=100, blank=True)
+    Location = models.ForeignKey(Location,on_delete = models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
 
 
