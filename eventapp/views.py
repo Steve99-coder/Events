@@ -29,3 +29,17 @@ def new_event(request):
         form = NewEventForm()
 
     return render(request, 'users/new_event.html', {"form": form})
+
+def search_results(request):
+
+    if 'title' in request.GET and request.GET["title"]:
+        search_term = request.GET.get("title")
+        searched_projects = Project.search_project(search_term)
+        current_user=request.user
+        message = f"{search_term}"
+        return render(request, 'users/search.html',{"message":message,"titles": searched_projects})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'users/search.html',{"message":message})
+
