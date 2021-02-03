@@ -1,6 +1,7 @@
 from django.conf.urls import url
 import datetime as dt
 from django.contrib.auth import views as auth_views
+from tinymce.models import HTMLField
 
 
 urlpatterns=[
@@ -12,3 +13,6 @@ urlpatterns=[
     url(r'^new/event$',views.new_event, name ='new-project'),
     
 ]
+
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
