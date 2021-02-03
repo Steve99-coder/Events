@@ -11,7 +11,7 @@ class NewProfileForm(forms.ModelForm):
 
 class NewLocationForm(forms.ModelForm):
     class Meta:
-        model = Comment
+        model = Location
         exclude = ['user','project']
 
 class NewEventForm(forms.ModelForm):

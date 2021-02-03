@@ -2,11 +2,10 @@ from django.shortcuts import render,redirect
 from .models import Profile,Event,Location
 from django.db.models import Max,F
 import datetime as dt
-from .forms import NewProfileForm,NewProjectForm,VoteForm,NewCommentForm
+from .forms import NewProfileForm,NewEventForm,NewLocationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .serializer import ProfileSerializer,ProjectSerializer
 from django.http  import HttpResponse,Http404,HttpResponseRedirect
 
 # Create your views here.
@@ -14,7 +13,7 @@ from django.http  import HttpResponse,Http404,HttpResponseRedirect
 def welcome(request):
     current_user = request.user
     user_profile= Profile.objects.filter(user=current_user.id).first()
-    comment= Comment.objects.filter(user=current_user.id).first()
+    # comment= Comment.objects.filter(user=current_user.id).first()
     event = Event.objects.all()
 
    
@@ -83,4 +82,24 @@ def edit_profile(request):
             form=NewProfileForm()
 
     return render(request, 'users/edit_profile.html', {'form':form,})
+
+@login_required(login_url='/accounts/login/')
+def new_comment(request, project_id):
+    current_user = request.user
+    project = Project.objects.get(id=project_id)
+    profile = Profile.objects.filter(user=current_user.id).first()
+    if request.method == 'POST':
+        form=NewCommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = current_user
+            comment.project=project
+            comment.save()
+            
+            return redirect('welcome')
+
+    else:
+        form = NewCommentForm()
+
+    return render(request, 'users/new_comment.html', {'form': form,'profile':profile, 'project':project, 'project_id':project_id})
 

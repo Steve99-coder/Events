@@ -5,7 +5,22 @@ from tinymce.models import HTMLField
 
 # Create your models here.
 
+class Location(models.Model):
+    locationName = models.CharField(max_length=30)
 
+    def save_Location(self):
+        self.save()
+
+    def delete_Location(self):
+        self.delete()
+
+    @classmethod
+    def update_Location(cls, id, value):
+        cls.objects.filter(id=id).update(image=value)
+
+    def __str__(self):
+        return self.locationName
+        
 class Profile(models.Model):
 
     bio = HTMLField()
@@ -67,18 +82,4 @@ class Event(models.Model):
         return title
 
         
-class Location(models.Model):
-    locationName = models.CharField(max_length=30)
 
-    def save_Location(self):
-        self.save()
-
-    def delete_Location(self):
-        self.delete()
-
-    @classmethod
-    def update_Location(cls, id, value):
-        cls.objects.filter(id=id).update(image=value)
-
-    def __str__(self):
-        return self.locationName
