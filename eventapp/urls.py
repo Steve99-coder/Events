@@ -1,5 +1,6 @@
 from django.conf.urls import url
 import datetime as dt
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns=[
