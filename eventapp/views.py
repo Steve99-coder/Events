@@ -44,5 +44,14 @@ def search_results(request):
         return render(request, 'users/search.html',{"message":message})
 
 def locations(request,location):
-    locations = Image.filterimageByLocation(location)
+    locations = Event.filterimageByLocation(location)
     return render(request,'locations.html',{'locations':locations})
+
+@login_required(login_url='/accounts/login/')
+def user_profile(request):
+    current_user = request.user
+    events = Event.objects.filter(user=current_user).all()
+    user_profile = Profile.objects.filter(user=current_user.id).first()
+    
+
+    return render(request, 'users/user_profile.html', { 'user_profile':user_profile,'events':events})
