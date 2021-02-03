@@ -1,4 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from .models import Profile,Event,Location
+from django.db.models import Max,F
+import datetime as dt
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -44,7 +47,7 @@ def search_results(request):
         return render(request, 'users/search.html',{"message":message})
 
 def locations(request,location):
-    locations = Event.filterimageByLocation(location)
+    locations = Event.filtereventByLocation(location)
     return render(request,'locations.html',{'locations':locations})
 
 @login_required(login_url='/accounts/login/')
