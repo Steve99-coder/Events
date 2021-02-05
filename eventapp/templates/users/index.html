@@ -1,0 +1,118 @@
+{%extends "users/base.html"%} {% block styles %}
+<style>
+    .site {
+        position: relative;
+        width: 50%;
+    }
+    
+    .images {
+        display: block;
+        height: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+        opacity: 1;
+        width: 100%;
+    }
+    
+    .overlay {
+        position: absolute;
+        top: 150px;
+        left: 150px;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+        transition: .5s ease;
+        opacity: 0;
+    }
+    
+    .text {
+        background-color: white;
+        color: black;
+        font-size: 25px;
+        padding: 16px 32px;
+        margin-left: 100px;
+        margin-right: 50px;
+    }
+    
+    .site:hover .images {
+        opacity: 0.4;
+    }
+    
+    .site:hover .overlay {
+        opacity: 1;
+    }
+</style>
+{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Awwards</title>
+</head>
+
+<body>
+
+    {% block content %}
+    <br><br><br>
+    <div class="container">
+
+        <div class="jumbotron">
+
+            <h1 style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxASDxUQEA8VFRUVFRUVFRUVFRUVFRUVFRUWFhUVFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0NGgoFDisZExkrKysrKystLSsrKysrKysrKysrKystKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIALcBEwMBIgACEQEDEQH/xAAaAAEBAQEBAQEAAAAAAAAAAAAAAQIDBAUH/8QAJhABAQEAAQIFBAMBAAAAAAAAAAERAgMxBBJBUfAhcZGhYcHRUv/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A/XFRVQVAFWIAqoA0IoKIoKIoKIoKzfn5is35+gdDUUF0QBRAFBcBBcMBPMeZJEwGvMl5JhgM8nDq8NenypemD5fLpfXsPoXo0BzGeyyg0IoKIoCooKIoKIoKsQBQAVnl8/Spy+foG1RQUABU00FVNAUQ0CfP2lJV0FxZGOPLPs1eUneg6SDz8vF8Z/P2cefjb6TP2D3YPl3r8/8Aq/kBpLPZQCVpmwlBoAFEUFEUFVlQVUAaEAVOSs8/9/oG1QBVZUFAAVGOfV4z1BtXm5+K9p+XHn1uV9Qevlzkv1rny8TPR5AHbn4jlf4cryQAAA0AHcSAKqAHZYJnsDQkqgoigoigoigqsqDTPNYnL+qDdE5WTu53rz7g6rryc/EX0+jly5W96D2cuvxnq58vFX0jzoDfLqW96ygAAAAAagAqACmgOqpqgoigoigWEoAozuNaCrrJoNDOmg1prGpoN3m48+rV5VxBrUIAqAAAACAogAAAIoAgAqaA7jOtSgKysoLBDQaGdNBvWU00F8xrNJQa0QBUEBOVcm+TmDUVIAKgAAAAAIAAACKAIoAgDsjG2NSg1ozpoNGpoCmoA0MroKVADVGQaSpqUEtYarANRWVAAAAAAABAUQBUAFRC0F0QBvUvFTQJy91Sp9YDS6zKoKJqgohoKqAKmiAVnVZoFZhakBVQBQABAFE0BQAEAASqAJCgeYMAb0SUBV1lQLDze4Aoz2WUGtVk0FVAAQAtZqs0ESKkBRFBRAFEAUQBUCABQASgKIaAKgNCANaIAoigupYAHm92kZzO34BpdZlUA1NAKglBKhUBoRQAAUQBUAFS0ACiAqFAAiAC6ApoAohoKuoAqsxQU1ACxN91ABnM7GgupRNBKi1kGoqQBQQFABRNTQUEtBQiARdS0AoIBipqgLqANCAKACiAKABqABqWACaUASoALKKAAAqAAAAABQAQtAClAEigD//Z);">
+                Event Organizing App</h1>
+            <p>With the world getting smarter, apps help simplify a lot of tasks on the go. Talking about the types of event apps, while the rest are meant exclusively for the attendees to utilize on the day of the event, there are certain apps i.e. event
+                planning apps that are meant for planners to utilize behind the scene in order to better plan and manage the event.</p>
+        </div>
+        <hr> {%for event in events%}
+        <div class="col-md-6">
+            <a href="{{event.link}}" target="_blank" class="site">
+
+                <h4 style="text-align: center;"><strong>Title:</strong> {{event.title}}</h4><br>
+
+                <div class="images">
+                    <img src="{{event.image.url}}" class="img-responsive" alt="{{event.title}}" style="width: 370px; height: 300px;">
+                </div>
+
+                <div class="overlay">
+                    <h5 class="text">View Event</h5>
+
+                </div>
+            </a>
+            <div class="card bg-light mb-3">
+                <div class="card-header ">{{event.Organization}}</div>
+                <div class="card-body ">
+                    <h5 class="card-title ">{{event.Location}}</h5>
+                    <p class="card-text ">{{event.Date}}</p>
+                </div>
+            </div>
+
+
+
+            <h4 style="font-size: 20px; "><strong>{{event.user.username}}: </strong>
+                <span>
+                  {% autoescape on %}
+                                {{event.description| safe}}
+                  {% endautoescape %}
+                              </span> </h4>
+
+
+
+
+
+
+            <p style="text-align: center;font-size: 20px; ">{{event.pub_date|timesince}}</p>
+
+        </div>
+        <hr> {%endfor%}
+
+
+
+    </div>
+    <hr> {% endblock %}
+
+</body>
+
+</html>

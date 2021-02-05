@@ -6,7 +6,7 @@
     <meta charset="utf-8"> {% if title %}
     <title>{{title}}</title>
     {% else %}
-    <title> Awwards</title>
+    <title> Events App</title>
     {% endif %} {% block styles %} {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'css/post.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
@@ -14,13 +14,14 @@
 
 </head>
 
-<body>
+<body style="background-image: url('https://images.unsplash.com/photo-1524055988636-436cfa46e59e?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8d2hpdGUlMjAlMjBiYWNrZ3JvdW5kfGVufDB8fDB8&ixlib=rb-1.2.1&w=1000&q=80'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;
+">
 
 
     {% include "navbar.html" %}
     <br><br><br><br><br> {% block content %} {%endblock%} {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    {% bootstrap_javascript %} {% endblock %}
+    {% bootstrap_javascript %} {% endblock %}z
 </body>
 
 </html>

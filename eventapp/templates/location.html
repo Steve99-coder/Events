@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="" style="font-size: 20px; font-family: 'Itim', cursive;">
+        {%extends 'base.html' %} {% block content %} {{block.super}}
+        <h1 class='text-center'> My Gallery</h1>
+        <hr>
+        <div class="container-fluid">
+            <div class="row">
+                {%if locations%} {%for location in locations%}
+                <div class="col-md-3 mb-3">
+
+                    <!--Card-->
+                    <div class="card">
+
+                        <!--Card image-->
+                        <div class="view overlay">
+                            <a data-toggle="modal" data-target="#picId{{location.id}}">
+                                <img src="{{location.image.url}}" class="card-img-top img-responsive styled"" alt="
+                                    image" width="100p">
+                            </a>
+                        </div>
+                    </div>
+                    <!--/.Card-->
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="picId{{location.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog .modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{location.imageName}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{location.image.url}}" class="img-fluid" alt="image">
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="row">
+                                        <div class="col-sm">Description: {{location.imageDescription}}</div>
+                                        <div class="col-sm">Location: {{location.imageLocation}}</div>
+                                    </div>
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                {%endfor%} {%else%}
+                <h2 class="text-center">No Events for this location</h2>
+                {%endif%}
+
+            </div>
+
+        </div>
+        {% endblock %}
+    </div>
+    <!-- Container -->
+</body>
+
+</html>

@@ -17,5 +17,5 @@ class NewLocationForm(forms.ModelForm):
 class NewEventForm(forms.ModelForm):
     class Meta:
         model = Event
-        exclude = ['user']   
+        exclude = ['user','comments']   
 

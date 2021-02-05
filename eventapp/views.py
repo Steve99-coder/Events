@@ -13,11 +13,10 @@ from django.http  import HttpResponse,Http404,HttpResponseRedirect
 def welcome(request):
     current_user = request.user
     user_profile= Profile.objects.filter(user=current_user.id).first()
-    # comment= Comment.objects.filter(user=current_user.id).first()
-    event = Event.objects.all()
+    events = Event.objects.all()
 
    
-    return render(request, 'users/index.html', {'user_profile':user_profile, 'events':events,'comment':comment})
+    return render(request, 'users/index.html', {'user_profile':user_profile, 'events':events})
 
 
 @login_required(login_url='/accounts/login/')
@@ -42,10 +41,10 @@ def search_results(request):
 
     if 'title' in request.GET and request.GET["title"]:
         search_term = request.GET.get("title")
-        searched_projects = Project.search_project(search_term)
+        searched_events = Event.search_event(search_term)
         current_user=request.user
         message = f"{search_term}"
-        return render(request, 'users/search.html',{"message":message,"titles": searched_projects})
+        return render(request, 'users/search.html',{"message":message,"titles": searched_events})
 
     else:
         message = "You haven't searched for any term"

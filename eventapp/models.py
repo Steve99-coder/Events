@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime as dt
 from tinymce.models import HTMLField
+from django.utils import timezone
 
 # Create your models here.
 
@@ -20,7 +21,7 @@ class Location(models.Model):
 
     def __str__(self):
         return self.locationName
-        
+
 class Profile(models.Model):
 
     bio = HTMLField()
@@ -50,9 +51,10 @@ class Event(models.Model):
     description=HTMLField()
     link=models.URLField()
     user = models.ForeignKey(User, on_delete=models.CASCADE,)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, blank=True, null=True)
+    Organization = models.CharField(max_length=100, blank=True)
     comments=models.CharField(max_length=100, blank=True)
-    Location = models.ForeignKey(Location,on_delete = models.CASCADE)
+    Location = models.CharField(max_length=100, blank=True)
+    Date = models.DateTimeField(default=timezone.now())
     pub_date = models.DateTimeField(auto_now_add=True)
 
 
